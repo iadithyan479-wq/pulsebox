@@ -19,6 +19,11 @@ Pulsebox is a **client-side music player**, not a catalog or a hosted music serv
 - Direct audio URL support
 - Synced lyrics display with clickable timestamp navigation
 - Web Audio frequency visualizer with a toggle in the player
+- Expanded now-playing sheet with animated artwork and dynamic cover color
+- Frosted-glass settings panel with reduced-blur accessibility mode
+- Playback speed control from 0.5× to 2×
+- Sleep timer presets and end-of-track stopping
+- Save-audio action and optional player stats
 - Search by title, artist, and album
 - Queue management and recently played tracks
 - Liked tracks stored for the current session
@@ -93,6 +98,19 @@ When adding a streaming URL, paste the optional LRC text into the **Lyrics** fie
 
 The `✦` button toggles a compact live frequency visualizer above the player. It uses the browser’s Web Audio API `AnalyserNode`, so the waveform is generated locally from the currently playing audio. Some browsers require the first click on Play before an audio context can start.
 
+### Open the expanded player
+
+Click the current artwork in the bottom player to open the expanded now-playing sheet. It includes animated artwork, dynamic cover color, lyrics, a save-audio action, a seek bar, and optional playback metadata.
+
+Open **⚙ Settings** from the sidebar or player to configure:
+
+- Animated artwork
+- Dynamic color accents
+- Player stats visibility
+- Reduced glass blur
+- Playback speed from 0.5× to 2×
+- Sleep timers for 15, 30, or 60 minutes, or the end of the current track
+
 ### Search and navigate
 
 Use the search field to filter tracks by title, artist, or album. The sidebar includes:
@@ -113,6 +131,8 @@ Use the search field to filter tracks by title, artist, or album. The sidebar in
 - `↻` — toggle repeat-current-track
 - `♫` — open synced lyrics for the current track
 - `✦` — toggle the audio visualizer
+- `⚙` — open player settings
+- Artwork thumbnail — open expanded now playing
 - Progress slider — seek within the current audio
 - Volume slider — adjust playback volume
 - Heart — like or unlike the current track
