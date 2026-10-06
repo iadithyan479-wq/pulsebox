@@ -224,3 +224,25 @@ Please do not commit copyrighted recordings, private audio, credentials, API key
 ## License
 
 Pulsebox is released under the [MIT License](LICENSE).
+
+## Android APK
+
+Pulsebox includes a lightweight Android WebView wrapper under [`android/`](android/). It bundles the same local-first web app, so local files, direct streams, lyrics, visualizer, settings, and the expanded player are available in the APK.
+
+### Install the latest APK
+
+Download `Pulsebox-debug.apk` from the [latest GitHub Release](https://github.com/iadithyan479-wq/pulsebox/releases/latest), then open it on an Android device. Android may ask you to allow installation from your browser or file manager.
+
+The debug APK is unsigned for production distribution but is installable for testing and personal use.
+
+### Build locally
+
+Requirements: JDK 17+, Android SDK Platform 35, and Android Build Tools 35.0.0.
+
+```bash
+cd android
+./gradlew assembleDebug
+# APK: app/build/outputs/apk/debug/app-debug.apk
+```
+
+The Android wrapper is intentionally small: [`MainActivity.java`](android/app/src/main/java/com/iadithyan/pulsebox/MainActivity.java) configures a WebView and loads the bundled assets from `app/src/main/assets/`.
