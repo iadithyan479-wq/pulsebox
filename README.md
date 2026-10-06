@@ -16,7 +16,9 @@ Pulsebox is a **client-side music player**, not a catalog or a hosted music serv
 
 - Play, pause, previous, next, shuffle, repeat, seek, and volume controls
 - Local audio file import with the browser File API
-- Direct streaming URL support
+- Direct audio URL support
+- Synced lyrics display with clickable timestamp navigation
+- Web Audio frequency visualizer with a toggle in the player
 - Search by title, artist, and album
 - Queue management and recently played tracks
 - Liked tracks stored for the current session
@@ -73,6 +75,24 @@ The remote server must allow browser playback and the URL must point directly to
 
 Only add and stream audio you have permission to access. Pulsebox does not bypass DRM, authentication, paywalls, or provider restrictions.
 
+### Display lyrics
+
+Click the `♫` button in the player to open the lyrics view for the current track. Timed lines are highlighted as the audio plays, and clicking a line seeks the track to that timestamp.
+
+Lyrics use a small LRC-compatible format:
+
+```text
+[00:12.00] First line of lyrics
+[00:18.50] Second line of lyrics
+[01:02.25] A later line
+```
+
+When adding a streaming URL, paste the optional LRC text into the **Lyrics** field. Demo tracks include original sample lyrics; local files without metadata show an empty lyrics state.
+
+### Use the visualizer
+
+The `✦` button toggles a compact live frequency visualizer above the player. It uses the browser’s Web Audio API `AnalyserNode`, so the waveform is generated locally from the currently playing audio. Some browsers require the first click on Play before an audio context can start.
+
 ### Search and navigate
 
 Use the search field to filter tracks by title, artist, or album. The sidebar includes:
@@ -91,6 +111,8 @@ Use the search field to filter tracks by title, artist, or album. The sidebar in
 - `↷` — next track
 - `⤨` — toggle shuffle
 - `↻` — toggle repeat-current-track
+- `♫` — open synced lyrics for the current track
+- `✦` — toggle the audio visualizer
 - Progress slider — seek within the current audio
 - Volume slider — adjust playback volume
 - Heart — like or unlike the current track
@@ -113,6 +135,8 @@ Pulsebox is local-first:
 
 Browser media policies may require a user click before audio playback begins. Cross-origin restrictions are controlled by the audio host; Pulsebox cannot make a remote server permit playback.
 
+The visualizer receives detailed frequency data from local files and remote streams that opt into browser CORS. A remote stream without CORS headers can still play normally, but its visualizer data may be unavailable to the browser for security reasons.
+
 ## Project structure
 
 ```text
@@ -127,6 +151,7 @@ pulsebox/
 The app deliberately uses browser-native APIs:
 
 - `HTMLAudioElement` for playback and seeking
+- `AudioContext`, `MediaElementAudioSourceNode`, and `AnalyserNode` for visualization
 - `FileReader` and object URLs for local audio
 - `URL.createObjectURL` for temporary downloads and local media
 - Native `<dialog>` for adding streaming URLs
@@ -145,6 +170,8 @@ When changing playback behavior, test:
 
 - Local audio import with one and multiple files
 - Direct URL addition with a browser-playable audio source
+- LRC lyrics display, line highlighting, and timestamp seeking
+- Visualizer toggle, audio-context startup, and responsive player layout
 - Play, pause, seek, volume, and track navigation
 - Shuffle and repeat behavior
 - Search results and empty states
